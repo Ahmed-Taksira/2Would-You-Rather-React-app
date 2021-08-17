@@ -39,6 +39,27 @@ class SignIn extends Component {
             image: { avatar: true, src: this.props.users[id].avatarURL },
         }))
 
+        let page=''
+        let x=window.location.href.substring(22)
+        if(x.includes('questions')){
+            page=`/${x}`
+        }
+        else if(x==='add'){
+            page='/add' 
+        }
+        else if(x==='home'){
+            page='/home'
+        }
+        else if(x==='leaderboard'){
+            page='/leaderboard'
+        }
+        else if(x===''){
+            page='/home'
+        }
+        else{
+            page='/wrongURL'
+        }
+
         return (
             <div>
                 <h3>Welcome to Would You Rather App!</h3>
@@ -51,7 +72,7 @@ class SignIn extends Component {
                     onChange={this.handleDropDownSelect}
                 />
                 <p></p>
-                <Link to={'/home'} className='btn' onClick={this.signAuthedUser}>
+                <Link to={page} className='btn' onClick={this.signAuthedUser}>
                     Sign in
                 </Link>
             </div>

@@ -33,10 +33,12 @@ class ResultQuestion extends Component {
                 <button className={optionOneClass}>
                   Would you rather {optionOneText}?
                 </button>
+                <p>{Math.round((optionOneVotes/totalVotes)*100)}%</p>
                 <p>{optionOneVotes} out of {totalVotes} votes.</p>
                 <button className={optionTwoClass}>
                     Would you rather {optionTwoText}?
                 </button>
+                <p>{Math.round((optionTwoVotes/totalVotes)*100)}%</p>
                 <p>{optionTwoVotes} out of {totalVotes} votes.</p>
             </div>
         )

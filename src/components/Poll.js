@@ -5,10 +5,6 @@ import {Link} from 'react-router-dom'
 
 
 class Poll extends Component {
-    toQuestion= (e, id)=>{
-        e.preventDefault()
-        //direct to question
-    }
     render() {
         const {name, avatarURL}=this.props.author
         const {id}= this.props
