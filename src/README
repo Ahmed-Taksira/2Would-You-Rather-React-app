@@ -1,0 +1,6 @@
+This project is the game: Would You Rather. You can answer questions created by your friends, create new questions,
+and view all your scores in the leaderboard. The more you create and answer questions, the more you climb!
+
+First off, download or clone the project from Github.
+Then type "npm install" into the terminal to install all dependencies.
+Finally, type "npm start" to launch the project.

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LeaderBlock from './LeaderBlock'
 
-
 class Leaderboard extends Component {
     render() {
+        const {usersIds}=this.props
         return (
             <div>
                 <h1>Leaderboard</h1>
                 <ul>
-                {this.props.usersIds.map(id=> (
+                {usersIds.map(id=> (
                         <LeaderBlock key={id} id={id}/>
                     ))}
                 </ul>

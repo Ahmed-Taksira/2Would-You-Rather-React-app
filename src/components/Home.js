@@ -1,43 +1,45 @@
 import './App.css'
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Poll from './Poll'
-import { Tabs, Tab, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Tabs } from 'antd'
 
-class Home extends Component {
-    render() {
+function Home(props) {
+    let answeredQuestionsIds = Object.keys(props.users[props.authedUser].answers)
+        .sort((a, b) => props.questions[b].timestamp - props.questions[a].timestamp)
 
-        let answeredQuestionsIds = Object.keys(this.props.users[this.props.authedUser].answers)
-        .sort((a, b) => this.props.questions[b].timestamp - this.props.questions[a].timestamp)
+    let unansweredQuestionsIds = props.questionsIds.filter(id => !answeredQuestionsIds.includes(id))
 
-        let unansweredQuestionsIds = this.props.questionsIds.filter(id => !answeredQuestionsIds.includes(id))
+    const { TabPane } = Tabs
 
-        return (
-            <div>
-                <h1>Welcome {this.props.loggedIn} to Would You Rather!</h1>
-                <Tabs defaultActiveKey="unanswered" id="uncontrolled-tab-example" className="mb-3">
-                    <Tab eventKey='unanswered' title='Unanswered Questions'>
-                        <ListGroup>
-                            {unansweredQuestionsIds.map((id) => (
-                                <ListGroupItem key={id}>
-                                    <Poll id={id} />
-                                </ListGroupItem>
-                            ))}
-                        </ListGroup>
-                    </Tab>
-                    <Tab eventKey='answered' title='Answered Questions'>
-                        <ListGroup>
+    return (
+        <div>
+            <h1>Welcome {props.loggedIn} to Would You Rather!</h1>
+
+            <Tabs defaultActiveKey="unanswered">
+                <TabPane tab="Unanswered Questions" key="unanswered">
+                    <h1>Unanswered</h1>
+                    <ul>
+                        {unansweredQuestionsIds.map((id) => (
+                            <li key={id}>
+                                <Poll id={id} />
+                            </li>
+                        ))}
+                    </ul>
+                </TabPane>
+                <TabPane tab="Answered Questions" key="answered">
+                    <h1>Answered</h1>
+                    <ul>
                         {answeredQuestionsIds.map((id) => (
-                                <ListGroupItem key={id}>
-                                    <Poll id={id} />
-                                </ListGroupItem>
-                            ))}
-                        </ListGroup>
-                    </Tab>
-                </Tabs>
-            </div>
-        )
-    }
+                            <li key={id}>
+                                <Poll id={id} />
+                            </li>
+                        ))}
+                    </ul>
+                </TabPane>
+            </Tabs>
+        </div>
+    )
 }
 
 function mapStateToProps({ users, authedUser, questions }) {
@@ -52,3 +54,7 @@ function mapStateToProps({ users, authedUser, questions }) {
 }
 
 export default connect(mapStateToProps)(Home)
+
+
+
+
